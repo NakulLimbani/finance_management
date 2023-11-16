@@ -1,0 +1,145 @@
+{% extends "finance_app/base.html" %}
+
+{% block title %}Income List{% endblock title %}
+
+{% block head %}
+<style>
+    
+  .button {
+      border: 0;
+      background: #191919;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      border: 2px solid #2ecc71;
+      padding: 14px 40px;
+      outline: none;
+      color: white;
+      border-radius: 24px;
+      transition: 0.25s;
+      cursor: pointer;
+      text-decoration: none; 
+      width:250px;
+  }
+
+  .button:hover {
+      background: #2ecc71;
+  }
+
+</style>
+{% endblock head %}
+
+{% block body %}
+<div class="container">
+    <h1>Income List</h1>
+
+    <!-- Date Range Filter -->
+    <form method="GET">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ request.GET.start_date }}">
+        
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" value="{{ request.GET.end_date }}">
+        <br>
+        <br>
+        <button type="submit">Apply Filter</button>
+        
+        <a href="http://127.0.0.1:8000/income_list" class="btn btn-secondary">Clear Filter</a>
+
+    </form>
+    <br>
+    <br>
+    <br>
+    
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for income in incomes %}
+                <tr>
+                    <td>{{ income.date }}</td>
+                    <td>{{ income.description|capfirst }}</td>
+                    <td>Rs.{{ income.amount }}</td>
+                    
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="2">No income records found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
+<br>
+
+<!-- Add the image tag to display the Matplotlib plot -->
+<img src="data:image/png;base64,{{ plot_image }}" alt="Income by Sources">
+<img src="data:image/png;base64,{{ pie_image }}" alt="Income by Sources">
+<br>
+<br>
+
+
+
+<!-- Income Summary -->
+<div>
+    <h2>Income Summary</h2>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Total Income</th>
+          <th>Total Expenses</th>
+          <th>Total Savings</th>
+        </tr> 
+      </thead> 
+      <tbody>
+        <tr>
+          <td>Rs.{{ total_incomes }}</td>
+          <td>Rs.{{ total_expenses }}</td> 
+          <td>Rs.{{ total_savings }}</td>   
+        </tr>
+      </tbody>  
+    </table>
+</div>
+
+<!-- Total Expenses Per Category-->
+<div>
+    <h1>Total Income Per Sources</h1>
+    <table class="table">
+      <thead>
+          <tr>
+              <th>Source</th>
+              <th>Amount</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for source_total in source_totals %}
+              <tr>
+                  <td>{{ source_total.source|capfirst }}</td>
+                  <td>Rs.{{ source_total.total_amount }}</td>    
+              </tr>
+          {% empty %}
+              <tr>
+                  <td colspan="2">No Income records found.</td>
+              </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+
+<!-- Add Income -->
+<a href="{% url 'add_income' %}" class="button-link">
+    <div class="button">
+        Add Income
+    </div>
+</a>
+<!--<h2><a href="{% url 'add_income' %}">Add Income</a></h2>-->
+
+{% endblock body %}

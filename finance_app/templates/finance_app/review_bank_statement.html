@@ -1,0 +1,31 @@
+{% extends 'finance_app/base.html' %} {# Extend a base template if you have one. #}
+
+{% block body %}
+  <!-- review_bank_statement.html -->
+<h2>Review Bank Statement</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in parsed_data %}
+            <tr>
+                <td>{{ data.date }}</td>
+                <td>{{ data.description }}</td>
+                <td>${{ data.amount }}</td>
+                <td>{{ data.category }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Save Transactions</button>
+</form>
+
+{% endblock body %}

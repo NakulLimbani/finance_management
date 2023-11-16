@@ -1,0 +1,43 @@
+{% extends 'finance_app/base.html' %}
+
+
+{% load static %} 
+
+{% block head %}
+      <style>
+        body {
+          background-image: url('{% static 'img/login_back.jpg' %}');
+          background-size: cover;
+          background-attachment: fixed;
+          
+      }
+      
+      
+      body::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5); 
+          z-index: -1; 
+      }
+      
+        
+    
+    </style>
+  
+{% endblock head %}
+
+{% block body %}
+  <div style="width: 600px; padding: 40px;border-radius: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #191919;background: rgba(25, 25, 25, 0.9 ); text-align: center;">
+    <h1 style="color: white; text-transform: uppercase; font-weight: 500;margin: 40px auto;">Upload Bank Statement</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <img src="https://cdn-icons-png.flaticon.com/128/1091/1091223.png" alt="Upload Icon" width="64" height="64">
+      <input type="file" name="statement_file" style="border: 0; background: none; display: block; margin: 40px auto; text-align: center; border: 2px solid #3498db; padding: 14px 10px; width: 400px; outline: none; color: white; border-radius: 24px; transition: 0.25s;" />
+      <input type="submit" value="Upload" style="border: 0; background: none; display: block; margin: 20px auto; text-align: center; border: 2px solid #2ecc71; padding: 14px 40px; outline: none; color: white; border-radius: 24px; transition: 0.25s; cursor: pointer;" />
+    </form>
+  </div>
+{% endblock body %}

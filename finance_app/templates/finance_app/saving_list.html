@@ -1,0 +1,158 @@
+
+
+
+{% extends "finance_app/base.html" %}
+
+{% block title %}Savings{% endblock title %}
+
+{% block body %}
+<style>
+   
+
+    .graph-container {
+        display: flex;
+        justify-content: space-between; /* Adjust as needed */
+    }
+
+    
+</style>
+
+<div class="container">
+    <h2>Savings for ({{ start_month }}) TO ({{ end_month }})</h2>
+    <br>
+
+    
+    <form method="GET">
+        <label for="start_month">Start month:</label>
+        <input type="month" id="start_month" name="start_month" value="{{ start_month }}">
+
+        <label for="end_month">End month:</label>
+        <input type="month" id="end_month" name="end_month" value="{{ end_month }}">
+        <br>
+        <br>
+        <button type="submit">Apply Filter</button>
+
+        <a href="http://127.0.0.1:8000/saving_list" class="btn btn-secondary" >Clear Filter</a>
+    </form>
+
+    <br>
+
+    <!-- Savings List -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Income</th>
+                <th>Expense</th>
+                <th>Savings</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for month in savings_data %}
+            <tr>
+                <td>{{ month.month }}</td>
+                <td>Rs.{{ month.income }}</td>
+                <td>Rs.{{ month.expense }}</td>
+                <td>Rs.{{ month.savings }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No data available for the selected date range.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <br>
+    <br>
+<div>
+    <table class="table">
+        <h2> Summary </h2>
+        <thead>
+            <tr>
+                <th>Total Income</th>
+                <th>Total Expenses</th>
+                <th>Net Savings</th>   
+            </tr>
+        </thead>
+        <body>
+            <td> Rs. {{ total_income }}</td>
+            <td> Rs. {{ total_expenses }}</td>
+            <td> Rs. {{ net_savings }}</td>
+    </table>
+</div>
+<br>
+<br>
+</div>
+<div>
+    <img src="data:image/png;base64,{{ bar_chart_image }}" alt="Savings per Month" />
+    <img src="data:image/png;base64,{{ chart_image }}" alt="Net Savings Chart" />
+    <br>
+    <br>
+</div>
+<div>   
+    <br><br>
+
+    <img src="data:image/png;base64,{{ bar_chart_image_static }}" alt="All Months Savings">
+    <br>
+    <br>
+    <img src="data:image/png;base64,{{ line_chart_image }}" alt="Savings Vs Expense">
+</div>
+
+<div>
+
+<!--
+    <h3>Income Details</h3>
+    <ul>
+        {% for income in incomes %}
+            <li>{{ income.date }} => {{ income.amount }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Expense Details</h3>
+    <ul>
+        {% for expense in expenses %}
+            <li>{{ expense.date }} => {{ expense.amount }}</li>
+        {% endfor %}
+    </ul>
+-->
+    <table class= 'table'>
+        <h3>Income Details</h3>
+        <thead>
+            <tr>
+                <th> Date </th>
+                <th> Amount </th>
+            </tr>
+        </thead>
+        <body>
+            {% for income in incomes %}
+                <tr>
+                    <td>{{ income.date }}</td>
+                    <td>Rs. {{ income.amount }}</td>
+                </tr>
+            {% endfor %}
+        </body>
+    </table>
+    <br>
+    <br>
+    <table class= 'table'>
+        <h3>Expense Details</h3>
+        <thead>
+            <tr>
+                <th> Date </th>
+                <th> Amount </th>
+            </tr>
+        </thead>
+        <body>
+            {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.date }}</td>
+                    <td>Rs. {{ expense.amount }}</td>
+                </tr>
+            {% endfor %}
+        </body>
+    </table>
+
+</div>
+
+{% endblock body %}

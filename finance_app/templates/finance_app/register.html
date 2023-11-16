@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+			margin: 0;
+			padding: 0;
+			font-family: sans-serif;
+			background: #34495e;
+
+			{% load static %}
+
+        
+            background-image: url('{% static 'img/login_back.jpg' %}');
+            background-size: cover;
+            background-attachment: fixed;
+		}
+		
+		.container {
+			width: 400px;
+			padding: 40px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background: #191919;
+			text-align: center;
+			border-radius: 24px;
+			margin: 20px auto; 
+		}
+		
+		.container h1 {
+			color: white;
+			text-transform: uppercase;
+			font-weight: 500;
+		}
+		
+		.container input[type="text"],
+		.container input[type="password"] {
+			border: 0;
+			background: none;
+			display: block;
+			margin: 20px auto;
+			text-align: center;
+			border: 2px solid #3498db;
+			padding: 14px 10px;
+			width: 300px;
+			outline: none;
+			color: white;
+			border-radius: 24px;
+			transition: 0.25s;
+		}
+		
+		.container input[type="text"]:focus,
+		.container input[type="password"]:focus {
+			width: 300px;
+			border-color: #2ecc71;
+		}
+		
+		.container .register-button {
+			border: 0;
+			background: none;
+			display: block;
+			margin: 20px auto;
+			text-align: center;
+			border: 2px solid #2ecc71;
+			padding: 14px 40px;
+			outline: none;
+			color: white;
+			border-radius: 24px;
+			transition: 0.25s;
+			cursor: pointer;
+			text-transform: uppercase; /* Added to match the style */
+			font-weight: 500; /* Added to match the style */
+			width: 250px; /* Added to match the style */
+		}
+		
+		.container .register-button:hover {
+			background: #2ecc71;
+		}
+		
+    </style>
+	<body>
+		<form class="container" action="{% url 'register' %}" method="post">
+			{% csrf_token %}
+			<h1>Register</h1>
+			<input type="text" name="username" placeholder="Username">
+			<input type="text" name="email" placeholder="Email">
+			<input type="password" name="password1" placeholder="Password">
+			<input type="password" name="password2" placeholder="Password Confirmation">
+			<input type="submit" name="register" value="Register" class="register-button">
+			<p style="color: #2ecc71;">Already registered? <a href="{% url 'login' %}">Log In</a></p>
+
+			<button style="background: none; border: none; font-size: 18px; color: #e74c3c;">
+				&#10006; <!-- This is the HTML entity for the cross icon (×) -->
+				<a href="{% url 'home' %}" style="text-decoration: none; color: #e74c3c;">Cancel</a>
+			</button>
+		</form>
+	</body>
+</html>
+
+<!--Register
+<div class="container py-5">
+	<h1>Register</h1>
+	<form method="POST">
+		{% csrf_token %}
+		{{ register_form }}                    
+		<button class="btn btn-primary" type="submit">Register</button>
+	</form>
+	<p class="text-center">If you already have an account, <a href="/login">login</a> instead.</p>
+</div>
+-->
