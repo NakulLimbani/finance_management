@@ -1,4 +1,4 @@
-## My Financial Management Project
+## Personal Financial Management System 
 
 This project is a financial management tool that helps users track their income and expenses.
 
