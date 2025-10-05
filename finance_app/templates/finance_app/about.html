@@ -3,6 +3,18 @@
 {%block title%}About Us {%endblock title%}
 
 {%block body%}
-{% lorem 4 %} 
+<div class="container-fluid px-0 mb-3" >
+    {% load static%}
+    <img src= {% static 'img/about2.jpg' %} class="d-block w-100 mx-0" alt="...">
+    <!-- <img src="https://source.unsplash.com/1200x400/?phone,contact" class="d-block w-100 mx-0" alt="..."> -->
+</div>
+    <!-- About Us Section -->
+    <section class="my-4">
+            <h1>About Us</h1>
+            
+            <p>Welcome to Finance Buddy! We're your trusted partner in financial management.<br>
+               Our mission is to empower you to take control of your financial future. Whether you're looking to budget, invest, or simply understand your financial health, we've got you covered.</p>
+
+    </section>
 {%endblock body%}
 
