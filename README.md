@@ -19,7 +19,7 @@ With this tool, users can gain a comprehensive overview of their financial statu
 To run this project locally, follow these steps:
 
 1. Clone the repository:
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/NakulLimbani/finance_management.git
 
 2. Install dependencies:
 pip install -r requirements.txt
